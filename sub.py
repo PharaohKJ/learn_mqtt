@@ -7,14 +7,16 @@ import paho.mqtt.client as paho
 import json
 
 def on_connect(mqttc, obj, rc):
-    mqttc.subscribe("$SYS/#", 0)
+    # mqttc.subscribe("$SYS/#", 0)
+    # mqttc.subscribe("$SYS/#", 0)
     print("rc: "+str(rc))
 
 def on_message(mqttc, obj, msg):
+    print(msg.topic+" "+str(msg.qos)+" "+str(msg.payload))
     try:
         st = str(msg.payload)
         decoded_str = json.loads(st)
-        # print(decoded)
+        print(decoded_str)
 
     except Exception as e:
         print '=== エラー内容 ==='
@@ -22,7 +24,6 @@ def on_message(mqttc, obj, msg):
         print 'args:' + str(e.args)
         print 'message:' + e.message
         print 'e自身:' + str(e)
-    print(msg.topic+" "+str(msg.qos)+" "+str(msg.payload))
     
 
 def on_publish(mqttc, obj, mid):
@@ -42,6 +43,6 @@ if __name__ == '__main__':
 
     mqttc.connect("localhost", 1883, 60)
 
-    mqttc.subscribe("my/topic/string", 0)
+    mqttc.subscribe("my/topic/string", 1)
 
     mqttc.loop_forever()
