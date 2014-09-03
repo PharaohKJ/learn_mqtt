@@ -232,3 +232,8 @@ https://gist.github.com/voluntas/8238751
 1. MQTT Server開始 `mosquitto`
 1. subscriber開始 `python sub.py`
 1. publisherで送信 `puthon pub.py`
+
+## Perfomance Test
+
+パフォーマンステストのために1000回 insntance.publish をループするように作ってみたが、
+20回しか実行されない・・・。→ Mosquitto側の制限らしい。
