@@ -236,4 +236,16 @@ https://gist.github.com/voluntas/8238751
 ## Perfomance Test
 
 パフォーマンステストのために1000回 insntance.publish をループするように作ってみたが、
-20回しか実行されない・・・。→ Mosquitto側の制限らしい。
+20回しか実行されない・・・。*max_inflight_messages_set* で設定することができる。
+
+publisher側のinstanceを `mqttc.max_inflight_messages_set(10000)` というようにしてやる。
+
+### 1000回ループした結果
+
+```
+$ time python pub.py
+real    0m1.044s
+user    0m0.964s
+sys     0m0.048s
+```
+

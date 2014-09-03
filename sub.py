@@ -40,7 +40,7 @@ if __name__ == '__main__':
     mqttc.on_message = on_message
     mqttc.on_connect = on_connect
     mqttc.on_subscribe = on_subscribe
-
+    # mqttc.max_inflight_messages_set(100)
     mqttc.connect("localhost", 1883, 60)
 
     mqttc.subscribe("my/topic/string", 1)

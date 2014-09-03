@@ -26,7 +26,12 @@ if __name__ == '__main__':
     mqttc.on_message = on_message
     mqttc.on_connect = on_connect
     mqttc.on_publish = on_publish
-
+    # 一度のプロトコルで送ることのできる量を制限できる 標準は20なので
+    # テストのために増量
+    mqttc.max_inflight_messages_set(10000)
     mqttc.connect("localhost", 1883, 60)
 
-    mqttc.publish("my/topic/string", json.dumps(json_data), 1)
+    for i in range(0,1000):
+        print i
+        json_data['Value'] = i
+        mqttc.publish("my/topic/string", json.dumps(json_data), 1)
